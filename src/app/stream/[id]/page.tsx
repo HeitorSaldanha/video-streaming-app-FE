@@ -1,7 +1,8 @@
-import { TopNavBar } from '@components/Navbar';
+'use client';
 import { StreamBrowser } from '@/components/StreamBrowser';
 
-export default function Home() {
+export default function Page({ params }: { params: { id: string } }) {
+  console.log({ params });
   return (
     <>
       <StreamBrowser />
