@@ -2,25 +2,22 @@
 import React, { useState } from 'react';
 import { StreamCard } from './StreamCard';
 import { Card } from 'flowbite-react';
+import {
+  useHMSActions,
+  useHMSStore,
+  selectRoomState,
+} from '@100mslive/react-sdk';
+import { Room } from '@types';
 
-const mock = [
-  {
-    streamer: 'Alanzoka',
-    tags: ['Idoso', 'Gostoso', 'Portugues'],
-    bio: 'Alanzoka best from Brazil, yeah baby, huh, thanks',
-    profilePicture:
-      'https://static-cdn.jtvnw.net/jtv_user_pictures/64d44235-1dee-4bca-95da-bee1ee96eea3-profile_image-300x300.png',
-  },
-];
-
-export const StreamBrowser: React.FC = () => {
-  const [streamList, setStreamList] = useState(mock);
+export const StreamBrowser: React.FC<{
+  activeStreams: Room[];
+}> = ({ activeStreams }) => {
   return (
     <main className="flex flex-col justify-center p-4 md:flex-row md:p-8">
-      {streamList ? (
+      {activeStreams ? (
         <div className="flex flex-row flex-wrap gap-3 justify-center">
-          {streamList.map((stream, index) => (
-            <StreamCard {...stream} key={`stream-${index}`} />
+          {activeStreams.map((stream) => (
+            <StreamCard {...stream} key={`stream-${stream.id}`} />
           ))}
         </div>
       ) : (

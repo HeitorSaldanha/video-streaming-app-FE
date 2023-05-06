@@ -1,10 +1,12 @@
-import { TopNavBar } from '@components/Navbar';
-import { StreamBrowser } from '@/components/StreamBrowser';
+import { StreamBrowser } from '@components/StreamBrowser';
+import { useListRooms } from '@hooks/useRooms';
 
-export default function Home() {
+async function Home() {
+  const roomsList = await useListRooms();
   return (
     <>
-      <StreamBrowser />
+      <StreamBrowser activeStreams={roomsList || []} />
     </>
   );
 }
+export default Home;
